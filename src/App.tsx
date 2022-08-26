@@ -1,13 +1,15 @@
-// import React, { FC } from "react";
+import { FC } from "react";
+import Container from "@mui/material/Container";
+import Navigation from "./components/Navigation";
+import Routes from "./routes/Routes";
 
-// const App: FC = () => {
-//   return <div>App</div>;
-// };
+const App: FC = () => {
+  return (
+    <Container maxWidth="xl" disableGutters={true}>
+      <Navigation />
+      <Routes />
+    </Container>
+  );
+};
 
-// export default App;
-
-import React, { FC } from "react";
-
-export default function App(): React.FC {
-  return <div>App</div>;
-}
+export default App;
