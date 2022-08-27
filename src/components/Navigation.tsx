@@ -16,7 +16,7 @@ import { Link } from "react-router-dom";
 
 const pages = [
   {
-    header: "Home",
+    header: "Add Todos",
     routes: "",
   },
   {
