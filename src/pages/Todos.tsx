@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
+import ButtonGroup from "@mui/material/ButtonGroup";
 
 export default function Todos() {
   const todo = useSelector((state: todoInterface) => state.todo.value);
@@ -16,7 +17,6 @@ export default function Todos() {
         <Grid container spacing={2}>
           <Grid item xs={4}>
             <Paper
-              variant="outlined"
               sx={{
                 padding: "1rem",
                 m: "1rem 0",
@@ -31,22 +31,27 @@ export default function Todos() {
                 <b>{`Time: `}</b> {todo.time}
               </Typography>
 
-              <Typography variant="body1" gutterBottom>
-                <b>{`Status: `}</b>
-                <Typography
-                  variant="body1"
-                  gutterBottom
-                  sx={{
-                    color: todo.status ? "green" : "red",
-                    display: "inline",
-                  }}
-                >
-                  {todo.status ? "Completed" : "Not yet done"}
-                </Typography>
+              <Typography
+                variant="body1"
+                gutterBottom
+                sx={{
+                  color: todo.status ? "green" : "red",
+                }}
+              >
+                <b style={{ color: "black" }}>{`Status: `}</b>
+                {todo.status ? "Completed" : "Not yet done"}
               </Typography>
-              <Button variant="contained" color="error">
-                Delete Item
-              </Button>
+              <ButtonGroup
+                variant="contained"
+                aria-label="outlined primary button group"
+              >
+                <Button variant="contained" color="success">
+                  Mark as Complete
+                </Button>
+                <Button variant="contained" color="error">
+                  Delete Item
+                </Button>
+              </ButtonGroup>
             </Paper>
           </Grid>
         </Grid>
