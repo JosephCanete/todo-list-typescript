@@ -10,17 +10,21 @@ export interface todoInterface {
   };
 }
 
+const initialStateValue = {
+  value: { title: "First Todo Item", time: "9:00 AM", state: false },
+};
+
 export const todoSlice = createSlice({
   name: "todo",
-  initialState: {
-    value: { title: "First Todo Item", time: "9:00 AM", state: false },
-  },
+  initialState: initialStateValue,
   reducers: {
     addTodo: (state, action) => {
-      state.value = action.payload;
+      state.value = [...state.value, { ...action.payload }];
     },
   },
 });
+
+// setAuthorData((prevValue) => [...prevValue, { ...data }]);
 
 export const { addTodo } = todoSlice.actions;
 
