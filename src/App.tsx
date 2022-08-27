@@ -5,7 +5,7 @@ import Routes from "./routes/Routes";
 
 const App: FC = () => {
   return (
-    <Container maxWidth="xl" disableGutters={true}>
+    <Container maxWidth="xl" disableGutters={false}>
       <Navigation />
       <Routes />
     </Container>
