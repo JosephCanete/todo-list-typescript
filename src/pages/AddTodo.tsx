@@ -4,7 +4,8 @@ import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import { useDispatch } from "react-redux";
 import { addTodo } from "../features/todo";
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 export default function AddTodo() {
   const dispatch = useDispatch();
@@ -16,9 +17,7 @@ export default function AddTodo() {
     if (!title) return console.log("Title field is undefined", title);
     if (!time) return console.log("Time field is undefined", time);
 
-    console.log(time, title);
-    dispatch(addTodo({ title: title, time: time, state: false }));
-    console.log("Data has sent into redux toolkit, clearing now the fields");
+    dispatch(addTodo({ id: uuidv4(), title: title, time: time, state: false }));
     setTitle("");
     setTime("");
   };
@@ -27,11 +26,9 @@ export default function AddTodo() {
     switch (event.currentTarget.id) {
       case "title":
         setTitle(event.currentTarget.value);
-        console.log("Done updating title state");
         break;
       case "time":
         setTime(event.currentTarget.value);
-        console.log("Done updating time state");
         break;
       default: {
         //wont happening

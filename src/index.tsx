@@ -5,10 +5,12 @@ import { BrowserRouter } from "react-router-dom";
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import todoReducer from "./features/todo";
+import dialogReducer from "./features/dialog";
 
 const store = configureStore({
   reducer: {
     todo: todoReducer,
+    dialog: dialogReducer,
   },
 });
 

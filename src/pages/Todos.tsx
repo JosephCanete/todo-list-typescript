@@ -1,22 +1,38 @@
 import { todoInterface } from "../features/todo";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { removeTodo, markTodo } from "../features/todo";
+import { toggleDialog } from "../features/dialog";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
+import FormDialog from "../components/FormDialog";
 
 export default function Todos() {
   const todo = useSelector((state: todoInterface) => state.todo.value);
+  const dispatch = useDispatch();
+
+  const removeTodoHandler = (itemId: string) => {
+    dispatch(removeTodo(itemId));
+  };
+
+  const markTodoHandler = (itemId: string) => {
+    dispatch(markTodo(itemId));
+  };
+
+  const toggleDialogHandler = (): void => {
+    dispatch(toggleDialog("toggle"));
+  };
 
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
           {todo &&
-            todo.map((item) => (
-              <Grid item xs={4}>
+            todo.map((item, index) => (
+              <Grid item xs={4} key={index}>
                 <Paper
                   sx={{
                     padding: "1rem",
@@ -50,11 +66,22 @@ export default function Todos() {
                     <Button
                       variant="contained"
                       color="success"
-                      onClick={() => console.log(todo)}
+                      onClick={() => markTodoHandler(item.id)}
                     >
                       Mark as Complete
                     </Button>
-                    <Button variant="contained" color="error">
+                    <Button
+                      variant="contained"
+                      color="warning"
+                      onClick={() => toggleDialogHandler()}
+                    >
+                      Update Todo
+                    </Button>
+                    <Button
+                      variant="contained"
+                      color="error"
+                      onClick={() => removeTodoHandler(item.id)}
+                    >
                       Delete Item
                     </Button>
                   </ButtonGroup>
@@ -62,6 +89,10 @@ export default function Todos() {
               </Grid>
             ))}
         </Grid>
+        <FormDialog
+          titleDialog="Please update todo"
+          contentDialog="Please fill the field for updating the todo"
+        />
       </Box>
     </>
   );

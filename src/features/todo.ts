@@ -1,9 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { v4 as uuidv4 } from "uuid";
 
 export interface todoInterface {
   todo: {
     value: [
       {
+        id: string;
         title: string;
         time: string;
         status: boolean;
@@ -13,7 +15,9 @@ export interface todoInterface {
 }
 
 const initialStateValue = {
-  value: [{ title: "Bible Reading", time: "6:00 AM", state: false }],
+  value: [
+    { id: uuidv4(), title: "Bible Reading", time: "6:00 AM", status: false },
+  ],
 };
 
 export const todoSlice = createSlice({
@@ -23,16 +27,15 @@ export const todoSlice = createSlice({
     addTodo: (state, action) => {
       state.value.push(action.payload);
     },
-    // removeTodo: (state, action) => {
-    //   state.value.filter((todo) => todo.id !== action.payload);
-    // },
+    removeTodo: (state, action) => {
+      state.value = state.value.filter((todo) => todo.id !== action.payload);
+    },
+    markTodo: (state, action) => {
+      console.log(state.value.find((todo) => todo.id === action.payload));
+    },
   },
 });
 
-// const newState = {...oldState, [action.payload.data._id]: action.payload.data}
-
-// setAuthorData((prevValue) => [...prevValue, { ...data }]);
-
-export const { addTodo } = todoSlice.actions;
+export const { addTodo, removeTodo, markTodo } = todoSlice.actions;
 
 export default todoSlice.reducer;
