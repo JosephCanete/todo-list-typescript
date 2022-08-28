@@ -9,51 +9,58 @@ import ButtonGroup from "@mui/material/ButtonGroup";
 
 export default function Todos() {
   const todo = useSelector((state: todoInterface) => state.todo.value);
-  console.log(todo);
 
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
-          <Grid item xs={4}>
-            <Paper
-              sx={{
-                padding: "1rem",
-                m: "1rem 0",
-              }}
-              elevation={3}
-            >
-              <Typography variant="body1" gutterBottom>
-                <b>{`Title: `}</b>
-                {todo.title}
-              </Typography>
-              <Typography variant="body1" gutterBottom>
-                <b>{`Time: `}</b> {todo.time}
-              </Typography>
+          {todo &&
+            todo.map((item) => (
+              <Grid item xs={4}>
+                <Paper
+                  sx={{
+                    padding: "1rem",
+                    m: "1rem 0",
+                  }}
+                  elevation={3}
+                >
+                  <Typography variant="body1" gutterBottom>
+                    <b>{`Title: `}</b>
+                    {item.title}
+                  </Typography>
+                  <Typography variant="body1" gutterBottom>
+                    <b>{`Time: `}</b> {item.time}
+                  </Typography>
 
-              <Typography
-                variant="body1"
-                gutterBottom
-                sx={{
-                  color: todo.status ? "green" : "red",
-                }}
-              >
-                <b style={{ color: "black" }}>{`Status: `}</b>
-                {todo.status ? "Completed" : "Not yet done"}
-              </Typography>
-              <ButtonGroup
-                variant="contained"
-                aria-label="outlined primary button group"
-              >
-                <Button variant="contained" color="success">
-                  Mark as Complete
-                </Button>
-                <Button variant="contained" color="error">
-                  Delete Item
-                </Button>
-              </ButtonGroup>
-            </Paper>
-          </Grid>
+                  <Typography
+                    variant="body1"
+                    gutterBottom
+                    sx={{
+                      color: item.status ? "#2e7d32" : "#d32f2f",
+                    }}
+                  >
+                    <b style={{ color: "black" }}>{`Status: `}</b>
+                    <b>{item.status ? "Completed" : "Not yet done"}</b>
+                  </Typography>
+
+                  <ButtonGroup
+                    variant="contained"
+                    aria-label="outlined primary button group"
+                  >
+                    <Button
+                      variant="contained"
+                      color="success"
+                      onClick={() => console.log(todo)}
+                    >
+                      Mark as Complete
+                    </Button>
+                    <Button variant="contained" color="error">
+                      Delete Item
+                    </Button>
+                  </ButtonGroup>
+                </Paper>
+              </Grid>
+            ))}
         </Grid>
       </Box>
     </>

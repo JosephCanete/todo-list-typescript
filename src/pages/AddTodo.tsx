@@ -16,6 +16,7 @@ export default function AddTodo() {
     if (!title) return console.log("Title field is undefined", title);
     if (!time) return console.log("Time field is undefined", time);
 
+    console.log(time, title);
     dispatch(addTodo({ title: title, time: time, state: false }));
     console.log("Data has sent into redux toolkit, clearing now the fields");
     setTitle("");
@@ -66,7 +67,7 @@ export default function AddTodo() {
         />
       </Box>
       <Button variant="contained" color="success" onClick={addTodoHandler}>
-        Add Item
+        Add Todo
       </Button>
     </Container>
   );

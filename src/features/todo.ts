@@ -2,16 +2,18 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export interface todoInterface {
   todo: {
-    value: {
-      title: string;
-      time: string;
-      status: boolean;
-    };
+    value: [
+      {
+        title: string;
+        time: string;
+        status: boolean;
+      }
+    ];
   };
 }
 
 const initialStateValue = {
-  value: { title: "First Todo Item", time: "9:00 AM", state: false },
+  value: [{ title: "Bible Reading", time: "6:00 AM", state: false }],
 };
 
 export const todoSlice = createSlice({
@@ -19,10 +21,15 @@ export const todoSlice = createSlice({
   initialState: initialStateValue,
   reducers: {
     addTodo: (state, action) => {
-      state.value = [...state.value, { ...action.payload }];
+      state.value.push(action.payload);
     },
+    // removeTodo: (state, action) => {
+    //   state.value.filter((todo) => todo.id !== action.payload);
+    // },
   },
 });
+
+// const newState = {...oldState, [action.payload.data._id]: action.payload.data}
 
 // setAuthorData((prevValue) => [...prevValue, { ...data }]);
 
