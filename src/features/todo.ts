@@ -17,6 +17,7 @@ export interface todoInterface {
 const initialStateValue = {
   value: [
     { id: uuidv4(), title: "Bible Reading", time: "6:00 AM", status: false },
+    { id: uuidv4(), title: "Eating Breakfast", time: "7:00 AM", status: false },
   ],
 };
 

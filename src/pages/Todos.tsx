@@ -2,6 +2,7 @@ import { todoInterface } from "../features/todo";
 import { useSelector, useDispatch } from "react-redux";
 import { removeTodo, markTodo } from "../features/todo";
 import { toggleDialog } from "../features/dialog";
+import React, { useState } from "react";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
@@ -13,6 +14,9 @@ import FormDialog from "../components/FormDialog";
 export default function Todos() {
   const todo = useSelector((state: todoInterface) => state.todo.value);
   const dispatch = useDispatch();
+  const [title, setTitle] = useState<string>("");
+  const [time, setTime] = useState<string>("");
+  const [id, setId] = useState<string>("");
 
   const removeTodoHandler = (itemId: string) => {
     dispatch(removeTodo(itemId));
@@ -22,7 +26,17 @@ export default function Todos() {
     dispatch(markTodo(itemId));
   };
 
-  const toggleDialogHandler = (): void => {
+  interface Props {
+    id: string;
+    title: string;
+    time: string;
+  }
+
+  const toggleDialogHandler = (data: Props) => {
+    console.log(data);
+    setTitle(data.title);
+    setTime(data.time);
+    setId(data.id);
     dispatch(toggleDialog("toggle"));
   };
 
@@ -73,7 +87,13 @@ export default function Todos() {
                     <Button
                       variant="contained"
                       color="warning"
-                      onClick={() => toggleDialogHandler()}
+                      onClick={() =>
+                        toggleDialogHandler({
+                          id: item.id,
+                          title: item.title,
+                          time: item.time,
+                        })
+                      }
                     >
                       Update Todo
                     </Button>
@@ -92,6 +112,9 @@ export default function Todos() {
         <FormDialog
           titleDialog="Please update todo"
           contentDialog="Please fill the field for updating the todo"
+          title={title}
+          time={time}
+          id={id}
         />
       </Box>
     </>
