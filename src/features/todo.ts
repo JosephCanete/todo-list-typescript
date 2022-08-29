@@ -34,9 +34,14 @@ export const todoSlice = createSlice({
     markTodo: (state, action) => {
       console.log(state.value.find((todo) => todo.id === action.payload));
     },
+    alterTodo: (state, action) => {
+      console.log("Alter todo invoked");
+      const result = state.value.find((todo) => todo.id === action.payload.id);
+      console.log(result);
+    },
   },
 });
 
-export const { addTodo, removeTodo, markTodo } = todoSlice.actions;
+export const { addTodo, removeTodo, markTodo, alterTodo } = todoSlice.actions;
 
 export default todoSlice.reducer;

@@ -9,6 +9,7 @@ import "./FormDialog.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleDialog, dialogInterface } from "../features/dialog";
 import React, { useState, useEffect } from "react";
+import { alterTodo } from "../features/todo";
 
 interface Props {
   titleDialog: string;
@@ -44,7 +45,7 @@ export default function FormDialog({
 
     setTimeout(() => {
       // dispatch(toggleDialog("toggle"));
-      console.log({ id: uuid, title: dialogTitle, time: dialogTime });
+      dispatch(alterTodo({ id: uuid, title: dialogTitle, time: dialogTime }));
     }, 250);
   };
 
