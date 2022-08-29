@@ -8,52 +8,88 @@ import DialogTitle from "@mui/material/DialogTitle";
 import "./FormDialog.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleDialog, dialogInterface } from "../features/dialog";
+import React, { useState, useEffect } from "react";
 
 interface Props {
   titleDialog: string;
   contentDialog: string;
+  title: string;
+  time: string;
+  id: string;
 }
 
-export default function FormDialog({ titleDialog, contentDialog }: Props) {
+export default function FormDialog({
+  titleDialog,
+  contentDialog,
+  title,
+  time,
+  id,
+}: Props) {
+  const dispatch = useDispatch();
   const dialogState = useSelector(
     (state: dialogInterface) => state.dialog.value.dialog
   );
-  const dispatch = useDispatch();
+  const [uuid, setUuid] = useState<string>("");
+  const [dialogTitle, setDialogTitle] = useState<string>("");
+  const [dialogTime, setDialogTime] = useState<string>("");
 
   const handleClose = () => {
-    dispatch(toggleDialog("toggle"));
+    setTimeout(() => {
+      dispatch(toggleDialog("toggle"));
+    }, 250);
   };
+
+  const handleSubmit = () => {
+    console.log("Submitting data");
+
+    setTimeout(() => {
+      // dispatch(toggleDialog("toggle"));
+      console.log({ id: uuid, title: dialogTitle, time: dialogTime });
+    }, 250);
+  };
+
+  useEffect(() => {
+    console.log("cloning data through useEffect");
+    title && setDialogTitle(title);
+    time && setDialogTime(time);
+    id && setUuid(id);
+  }, [dialogState]);
 
   return (
     <>
       <Dialog open={dialogState} onClose={handleClose}>
-        <DialogTitle>{titleDialog}</DialogTitle>
+        <DialogTitle>
+          {titleDialog} {uuid}
+        </DialogTitle>
         <DialogContent>
           <DialogContentText>{contentDialog}</DialogContentText>
           <TextField
             autoFocus
             margin="dense"
-            id="name"
+            id="tile"
             label="Title"
             type="text"
             fullWidth
             variant="standard"
+            value={dialogTitle}
+            onChange={(event) => setDialogTitle(event.currentTarget.value)}
           />
           <TextField
-            autoFocus
             margin="dense"
-            id="name"
+            id="time"
             label="Time"
             type="text"
             fullWidth
             variant="standard"
+            value={dialogTime}
+            onChange={(event) => setDialogTime(event.currentTarget.value)}
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="error">
             Cancel
           </Button>
-          <Button onClick={handleClose} color="success">
+          <Button onClick={handleSubmit} color="success">
             Submit
           </Button>
         </DialogActions>
