@@ -32,7 +32,7 @@ export const todoSlice = createSlice({
       state.value = state.value.filter((todo) => todo.id !== action.payload);
     },
     markTodo: (state, action) => {
-      console.log(state.value.find((todo) => todo.id === action.payload));
+      state.value = state.value.filter((todo) => todo.id === action.payload.id);
     },
     alterTodo: (state, action) => {
       console.log("Alter todo invoked");
