@@ -175,7 +175,7 @@ const Navigation = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/assets/me.png" />
+                <Avatar alt="Profile Picture" src="/assets/me.png" />
               </IconButton>
             </Tooltip>
             <Menu
