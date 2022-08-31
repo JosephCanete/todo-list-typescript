@@ -56,10 +56,23 @@ export default function Todos() {
                 >
                   <Typography variant="body1" gutterBottom>
                     <b>{`Title: `}</b>
-                    {item.title}
+                    <span
+                      style={{
+                        textDecorationLine: item.status ? "line-through" : "",
+                      }}
+                    >
+                      {item.title}
+                    </span>
                   </Typography>
                   <Typography variant="body1" gutterBottom>
-                    <b>{`Time: `}</b> {item.time}
+                    <b>{`Time: `}</b>
+                    <span
+                      style={{
+                        textDecorationLine: item.status ? "line-through" : "",
+                      }}
+                    >
+                      {item.time}
+                    </span>
                   </Typography>
 
                   <Typography

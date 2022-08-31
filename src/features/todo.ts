@@ -17,7 +17,7 @@ export interface todoInterface {
 const initialStateValue = {
   value: [
     { id: uuidv4(), title: "Bible Reading", time: "6:00 AM", status: false },
-    { id: uuidv4(), title: "Eating Breakfast", time: "7:00 AM", status: false },
+    { id: uuidv4(), title: "Eating Breakfast", time: "7:00 AM", status: true },
   ],
 };
 
@@ -32,7 +32,8 @@ export const todoSlice = createSlice({
       state.value = state.value.filter((todo) => todo.id !== action.payload);
     },
     markTodo: (state, action) => {
-      state.value = state.value.filter((todo) => todo.id === action.payload.id);
+      // state.value = state.value.filter((todo) => todo.id === action.payload.id);
+      console.log("invoked update state", state.value);
     },
     alterTodo: (state, action) => {
       console.log("Alter todo invoked");
