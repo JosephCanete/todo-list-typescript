@@ -22,8 +22,8 @@ export default function Todos() {
     dispatch(removeTodo(itemId));
   };
 
-  const markTodoHandler = (itemId: string) => {
-    dispatch(markTodo(itemId));
+  const markTodoHandler = (itemId: string, itemStatus: boolean) => {
+    dispatch(markTodo({ itemId, itemStatus }));
   };
 
   interface Props {
@@ -33,7 +33,6 @@ export default function Todos() {
   }
 
   const toggleDialogHandler = (data: Props) => {
-    console.log(data);
     setTitle(data.title);
     setTime(data.time);
     setId(data.id);
@@ -93,7 +92,7 @@ export default function Todos() {
                     <Button
                       variant="contained"
                       color="success"
-                      onClick={() => markTodoHandler(item.id)}
+                      onClick={() => markTodoHandler(item.id, item.status)}
                     >
                       Mark as Complete
                     </Button>

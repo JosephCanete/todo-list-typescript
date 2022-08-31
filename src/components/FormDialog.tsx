@@ -41,11 +41,13 @@ export default function FormDialog({
   };
 
   const handleSubmit = () => {
-    console.log("Submitting data");
+    if (!dialogTitle || !dialogTime) {
+      return alert("Empty fields are not allowed");
+    }
 
     setTimeout(() => {
-      // dispatch(toggleDialog("toggle"));
       dispatch(alterTodo({ id: uuid, title: dialogTitle, time: dialogTime }));
+      dispatch(toggleDialog("toggle"));
     }, 250);
   };
 
@@ -59,9 +61,7 @@ export default function FormDialog({
   return (
     <>
       <Dialog open={dialogState} onClose={handleClose}>
-        <DialogTitle>
-          {titleDialog} {uuid}
-        </DialogTitle>
+        <DialogTitle>{titleDialog}</DialogTitle>
         <DialogContent>
           <DialogContentText>{contentDialog}</DialogContentText>
           <TextField
@@ -74,6 +74,7 @@ export default function FormDialog({
             variant="standard"
             value={dialogTitle}
             onChange={(event) => setDialogTitle(event.currentTarget.value)}
+            onBlur={(event) => setDialogTitle(event.currentTarget.value)}
           />
           <TextField
             margin="dense"
@@ -84,6 +85,7 @@ export default function FormDialog({
             variant="standard"
             value={dialogTime}
             onChange={(event) => setDialogTime(event.currentTarget.value)}
+            onBlur={(event) => setDialogTime(event.currentTarget.value)}
           />
         </DialogContent>
         <DialogActions>
@@ -91,7 +93,7 @@ export default function FormDialog({
             Cancel
           </Button>
           <Button onClick={handleSubmit} color="success">
-            Submit
+            Update Todo
           </Button>
         </DialogActions>
       </Dialog>
