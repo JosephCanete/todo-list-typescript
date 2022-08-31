@@ -32,13 +32,26 @@ export const todoSlice = createSlice({
       state.value = state.value.filter((todo) => todo.id !== action.payload);
     },
     markTodo: (state, action) => {
-      // state.value = state.value.filter((todo) => todo.id === action.payload.id);
-      console.log("invoked update state", state.value);
+      //Find the Index Object we want to update
+      const indexTodoDone = state.value.findIndex(
+        (todo) => todo.id === action.payload.itemId
+      );
+
+      state.value[indexTodoDone] = {
+        ...state.value[indexTodoDone],
+        status: !action.payload.itemStatus,
+      };
     },
     alterTodo: (state, action) => {
-      console.log("Alter todo invoked");
-      const result = state.value.find((todo) => todo.id === action.payload.id);
-      console.log(result);
+      const indexTodoAlter = state.value.findIndex(
+        (todo) => todo.id === action.payload.id
+      );
+
+      state.value[indexTodoAlter] = {
+        ...state.value[indexTodoAlter],
+        title: action.payload.title,
+        time: action.payload.time,
+      };
     },
   },
 });

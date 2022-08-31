@@ -14,9 +14,9 @@ export default function AddTodo() {
   const [time, setTime] = useState<string>("");
 
   const addTodoHandler = () => {
-    if (!title) return console.log("Title field is undefined", title);
-    if (!time) return console.log("Time field is undefined", time);
-
+    if (!title || !time) {
+      return alert("Empty fields are not allowed");
+    }
     dispatch(addTodo({ id: uuidv4(), title: title, time: time, state: false }));
     setTitle("");
     setTime("");
